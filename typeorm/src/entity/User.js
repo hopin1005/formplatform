@@ -6,23 +6,20 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
     return c > 3 && r && Object.defineProperty(target, key, r), r;
 };
 exports.__esModule = true;
-exports.UserController = void 0;
-var routing_controllers_1 = require("routing-controllers");
-require("reflect-metadata");
-var test = require('../../index');
-test = test.test;
-var UserController = /** @class */ (function () {
-    function UserController() {
+exports.User = void 0;
+var typeorm_1 = require("typeorm");
+var User = /** @class */ (function () {
+    function User() {
     }
-    UserController.prototype.getAll = function () {
-        return test();
-    };
     __decorate([
-        routing_controllers_1.Get('/getallform')
-    ], UserController.prototype, "getAll");
-    UserController = __decorate([
-        routing_controllers_1.JsonController()
-    ], UserController);
-    return UserController;
+        typeorm_1.PrimaryGeneratedColumn()
+    ], User.prototype, "id");
+    __decorate([
+        typeorm_1.Column("text")
+    ], User.prototype, "firstName");
+    User = __decorate([
+        typeorm_1.Entity()
+    ], User);
+    return User;
 }());
-exports.UserController = UserController;
+exports.User = User;

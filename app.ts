@@ -1,6 +1,6 @@
 import { createExpressServer } from 'routing-controllers';
-import { UserController } from './UserController';
-
+import { UserController } from './src/router/UserController';
+import "reflect-metadata";
 
 const app = createExpressServer({
   routePrefix: '/api',

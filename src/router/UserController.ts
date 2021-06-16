@@ -1,16 +1,12 @@
 import { JsonController, Param, Body, Get, Post } from 'routing-controllers';
 import "reflect-metadata";
-
+var test = require('../../index')
+test = test.test
 
 @JsonController()
 export class UserController {
   @Get('/getallform')
-  getAllForm() {
-    return 'This action returns all users';
+  getAll(){
+    return test();
   }
-
-  
-
-  
-  
 }
