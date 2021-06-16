@@ -2,9 +2,9 @@
    "type": "mysql",
    "host": "192.168.150.143",
    "port": 3306,
-   "username": "artogo",
-   "password": "artogo",
-   "database": "artogo",
+   "username": "****",
+   "password": "****",
+   "database": "****",
    "synchronize": true,
    "logging": false,
    "entities": [
