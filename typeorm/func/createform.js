@@ -36,32 +36,30 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
     }
 };
 exports.__esModule = true;
+exports.createForm = void 0;
 require("reflect-metadata");
 var typeorm_1 = require("typeorm");
-var User_1 = require("./typeorm/src/entity/User");
-function test() {
+var Formdata_1 = require("../entity/Formdata");
+function createForm() {
     var _this = this;
     typeorm_1.createConnection().then(function (connection) { return __awaiter(_this, void 0, void 0, function () {
-        var user, users;
+        var formData;
         return __generator(this, function (_a) {
             switch (_a.label) {
                 case 0:
-                    console.log("Inserting a new user into the database...");
-                    user = new User_1.User();
-                    user.firstName = "Timber";
-                    return [4 /*yield*/, connection.manager.save(user)];
+                    formData = new Formdata_1.Formdata();
+                    formData.id = 1;
+                    formData.info = "問卷描述描述描述";
+                    formData.name = "問卷名稱";
+                    formData.link = "<iframe>http://test.com.tw</iframe>";
+                    formData.endTime = "2021-12-31";
+                    formData.startTime = "2021-06-17";
+                    return [4 /*yield*/, connection.manager.save(formData)];
                 case 1:
                     _a.sent();
-                    console.log("Saved a new user with id: " + user.id);
-                    console.log("Loading users from the database...");
-                    return [4 /*yield*/, connection.manager.find(User_1.User)];
-                case 2:
-                    users = _a.sent();
-                    console.log("Loaded users: ", users);
-                    console.log("Here you can setup and run express/koa/any other framework.");
-                    return [2 /*return*/, ("db create")];
+                    return [2 /*return*/];
             }
         });
     }); })["catch"](function (error) { return console.log(error); });
 }
-exports.test = test;
+exports.createForm = createForm;

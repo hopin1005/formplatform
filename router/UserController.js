@@ -5,21 +5,32 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
     else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
     return c > 3 && r && Object.defineProperty(target, key, r), r;
 };
+var __param = (this && this.__param) || function (paramIndex, decorator) {
+    return function (target, key) { decorator(target, key, paramIndex); }
+};
 exports.__esModule = true;
 exports.UserController = void 0;
 var routing_controllers_1 = require("routing-controllers");
 require("reflect-metadata");
-var test = require('../../index');
-test = test.test;
+var createform_1 = require("../typeorm/func/createform");
+var getallform_1 = require("../typeorm/func/getallform");
 var UserController = /** @class */ (function () {
     function UserController() {
     }
-    UserController.prototype.getAll = function () {
-        return test();
+    UserController.prototype.getAll = function (response) {
+        getallform_1.getallform(response);
+    };
+    UserController.prototype.create = function (request) {
+        createform_1.createForm();
     };
     __decorate([
-        routing_controllers_1.Get('/getallform')
+        routing_controllers_1.Get('/getallform'),
+        __param(0, routing_controllers_1.Res())
     ], UserController.prototype, "getAll");
+    __decorate([
+        routing_controllers_1.Get('/createForm'),
+        __param(0, routing_controllers_1.Req())
+    ], UserController.prototype, "create");
     UserController = __decorate([
         routing_controllers_1.JsonController()
     ], UserController);
