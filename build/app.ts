@@ -1,5 +1,5 @@
 import { createExpressServer } from 'routing-controllers';
-import { UserController } from '../src/router/UserController';
+import { UserController } from '../router/UserController';
 import "reflect-metadata";
 
 const app = createExpressServer({

@@ -14,6 +14,7 @@ export function createForm(){
         formData.startTime = "2021-06-17";
 
         await connection.manager.save(formData);
+
     
     }).catch(error => console.log(error));
 }

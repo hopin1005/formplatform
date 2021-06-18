@@ -14,18 +14,21 @@ var routing_controllers_1 = require("routing-controllers");
 require("reflect-metadata");
 var createform_1 = require("../typeorm/func/createform");
 var getallform_1 = require("../typeorm/func/getallform");
+var typeorm_1 = require("typeorm");
+var Formdata_1 = require("../typeorm/entity/Formdata");
+typeorm_1.createConnection();
 var UserController = /** @class */ (function () {
     function UserController() {
     }
-    UserController.prototype.getAll = function (response) {
-        getallform_1.getallform(response);
+    UserController.prototype.getAll = function () {
+        var repo = typeorm_1.getConnection().getRepository(Formdata_1.Formdata);
+        return getallform_1.getallform(repo);
     };
     UserController.prototype.create = function (request) {
         createform_1.createForm();
     };
     __decorate([
-        routing_controllers_1.Get('/getallform'),
-        __param(0, routing_controllers_1.Res())
+        routing_controllers_1.Get('/getallform')
     ], UserController.prototype, "getAll");
     __decorate([
         routing_controllers_1.Get('/createForm'),
