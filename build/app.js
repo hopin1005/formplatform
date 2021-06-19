@@ -2,7 +2,12 @@
 exports.__esModule = true;
 var routing_controllers_1 = require("routing-controllers");
 var UserController_1 = require("../router/UserController");
-var app = routing_controllers_1.createExpressServer({
+require("reflect-metadata");
+var express = require('express');
+var cookieParser = require('cookie-parser');
+var app = express();
+app.use(cookieParser());
+routing_controllers_1.useExpressServer(app, {
     routePrefix: '/api',
     controllers: [UserController_1.UserController]
 });

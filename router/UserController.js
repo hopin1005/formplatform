@@ -17,10 +17,17 @@ var getallform_1 = require("../typeorm/func/getallform");
 var getoneform_1 = require("../typeorm/func/getoneform");
 var typeorm_1 = require("typeorm");
 var Formdata_1 = require("../typeorm/entity/Formdata");
+var setcookie_1 = require("../typeorm/func/setcookie");
+var Session_1 = require("../typeorm/entity/Session");
 typeorm_1.createConnection();
 var UserController = /** @class */ (function () {
     function UserController() {
     }
+    UserController.prototype.home = function (request, response) {
+        var repo = typeorm_1.getConnection().getRepository(Session_1.Session);
+        var res = setcookie_1.setcookie(request, response, repo);
+        return response.send(res);
+    };
     UserController.prototype.getAll = function (sort) {
         var repo = typeorm_1.getConnection().getRepository(Formdata_1.Formdata);
         return getallform_1.getallform(repo, sort);
@@ -33,6 +40,10 @@ var UserController = /** @class */ (function () {
         var repo = typeorm_1.getConnection().getRepository(Formdata_1.Formdata);
         return createform_1.createForm(repo);
     };
+    __decorate([
+        routing_controllers_1.Get('/setcookie'),
+        __param(0, routing_controllers_1.Req()), __param(1, routing_controllers_1.Res())
+    ], UserController.prototype, "home");
     __decorate([
         routing_controllers_1.Get('/getallform'),
         __param(0, routing_controllers_1.QueryParam("sort"))
