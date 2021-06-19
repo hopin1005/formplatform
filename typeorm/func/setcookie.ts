@@ -10,7 +10,7 @@ export function setcookie(request : Request, response : Response, repo){
         session.userSession = cookies;
         session.writeCount = 0;
         repo.save(session);
-        response.cookie('userid', cookies);
+        response.cookie('userid', cookies, {sameSite: 'none', secure: true});
     }
 
 }
