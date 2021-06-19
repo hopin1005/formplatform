@@ -14,22 +14,33 @@ var routing_controllers_1 = require("routing-controllers");
 require("reflect-metadata");
 var createform_1 = require("../typeorm/func/createform");
 var getallform_1 = require("../typeorm/func/getallform");
+var getoneform_1 = require("../typeorm/func/getoneform");
 var typeorm_1 = require("typeorm");
 var Formdata_1 = require("../typeorm/entity/Formdata");
 typeorm_1.createConnection();
 var UserController = /** @class */ (function () {
     function UserController() {
     }
-    UserController.prototype.getAll = function () {
+    UserController.prototype.getAll = function (sort) {
         var repo = typeorm_1.getConnection().getRepository(Formdata_1.Formdata);
-        return getallform_1.getallform(repo);
+        return getallform_1.getallform(repo, sort);
+    };
+    UserController.prototype.getOne = function (id) {
+        var repo = typeorm_1.getConnection().getRepository(Formdata_1.Formdata);
+        return getoneform_1.getoneform(repo, id);
     };
     UserController.prototype.create = function (request) {
-        createform_1.createForm();
+        var repo = typeorm_1.getConnection().getRepository(Formdata_1.Formdata);
+        return createform_1.createForm(repo);
     };
     __decorate([
-        routing_controllers_1.Get('/getallform')
+        routing_controllers_1.Get('/getallform'),
+        __param(0, routing_controllers_1.QueryParam("sort"))
     ], UserController.prototype, "getAll");
+    __decorate([
+        routing_controllers_1.Get('/getoneform/:id'),
+        __param(0, routing_controllers_1.Param("id"))
+    ], UserController.prototype, "getOne");
     __decorate([
         routing_controllers_1.Get('/createForm'),
         __param(0, routing_controllers_1.Req())

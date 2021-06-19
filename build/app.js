@@ -6,5 +6,5 @@ var app = routing_controllers_1.createExpressServer({
     routePrefix: '/api',
     controllers: [UserController_1.UserController]
 });
-// run express application on port 3000
+// run express application on port 4000
 app.listen(4000);
