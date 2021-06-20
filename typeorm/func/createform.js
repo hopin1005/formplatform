@@ -1,18 +1,13 @@
 "use strict";
 exports.__esModule = true;
 exports.createForm = void 0;
+var getTime_1 = require("../../other/func/getTime");
 require("reflect-metadata");
-var Formdata_1 = require("../entity/Formdata");
-function createForm(repo) {
-    var formData = new Formdata_1.Formdata();
-    formData.id = 2;
-    formData.info = "問卷描述描述描述2";
-    formData.name = "問卷名稱2";
-    var link = '<iframe src="https://docs.google.com/forms/d/e/1FAIpQLSdYQv04tfhfw33mcW7WVFoKD1OcWZJC1LOtigZHDwMj75ez3g/viewform?embedded=true" width="640" height="377" frameborder="0" marginheight="0" marginwidth="0">載入中…</iframe>';
-    link = link.replace(/\"/g, "'");
-    formData.link = link;
-    formData.endTime = "2021-10-31";
-    formData.startTime = "2021-06-17";
-    return repo.save(formData);
+function createForm(repo, form) {
+    //待補: 使用者次數驗證
+    console.log(form);
+    var time = getTime_1.getTime();
+    form.startTime = time;
+    return repo.save(form);
 }
 exports.createForm = createForm;

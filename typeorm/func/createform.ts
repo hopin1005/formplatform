@@ -1,18 +1,19 @@
+import { getTime } from "../../other/func/getTime";
 import "reflect-metadata";
 import {Formdata} from "../entity/Formdata";
 
-export function createForm(repo){
+// {
+//         name: 'formname4',
+//         info: 'forminfo4',
+//         link: "<iframe src='https://docs.google.com/forms/d/e/1FAIpQLSfxyTqWFQ-JYSqupN6hOWLbs9H3uQg3Ohb0ziMpe1whx3jwWw/viewform?embedded=true' width='640' height='377' frameborder='0' marginheight='0' marginwidth='0'>載入中…</iframe>",
+//         endTime: '2021-06-20'
+// }
+export function createForm(repo, form: Formdata){
         
-        const formData = new Formdata();
-        formData.id = 2;
-        formData.info = "問卷描述描述描述2";
-        formData.name = "問卷名稱2";
-        var link: string = '<iframe src="https://docs.google.com/forms/d/e/1FAIpQLSdYQv04tfhfw33mcW7WVFoKD1OcWZJC1LOtigZHDwMj75ez3g/viewform?embedded=true" width="640" height="377" frameborder="0" marginheight="0" marginwidth="0">載入中…</iframe>'
-        link = link.replace(/\"/g,"'");
-        formData.link = link;
-        formData.endTime = "2021-10-31";
-        formData.startTime = "2021-06-17";
-
-        return repo.save(formData);
+        //待補: 使用者次數驗證
+        //return success true
+        var time: string = getTime();
+        form.startTime = time;
+        return repo.save(form);
 
 }

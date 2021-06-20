@@ -18,13 +18,13 @@ var getoneform_1 = require("../typeorm/func/getoneform");
 var typeorm_1 = require("typeorm");
 var Formdata_1 = require("../typeorm/entity/Formdata");
 var setcookie_1 = require("../typeorm/func/setcookie");
-var Session_1 = require("../typeorm/entity/Session");
+var User_1 = require("../typeorm/entity/User");
 typeorm_1.createConnection();
 var UserController = /** @class */ (function () {
     function UserController() {
     }
     UserController.prototype.home = function (request, response) {
-        var repo = typeorm_1.getConnection().getRepository(Session_1.Session);
+        var repo = typeorm_1.getConnection().getRepository(User_1.User);
         var res = setcookie_1.setcookie(request, response, repo);
         return response.send(res);
     };
@@ -36,9 +36,9 @@ var UserController = /** @class */ (function () {
         var repo = typeorm_1.getConnection().getRepository(Formdata_1.Formdata);
         return getoneform_1.getoneform(repo, id);
     };
-    UserController.prototype.create = function (request) {
+    UserController.prototype.create = function (form) {
         var repo = typeorm_1.getConnection().getRepository(Formdata_1.Formdata);
-        return createform_1.createForm(repo);
+        return createform_1.createForm(repo, form);
     };
     __decorate([
         routing_controllers_1.Get('/setcookie'),
@@ -53,8 +53,8 @@ var UserController = /** @class */ (function () {
         __param(0, routing_controllers_1.Param("id"))
     ], UserController.prototype, "getOne");
     __decorate([
-        routing_controllers_1.Get('/createForm'),
-        __param(0, routing_controllers_1.Req())
+        routing_controllers_1.Post('/createform'),
+        __param(0, routing_controllers_1.Body())
     ], UserController.prototype, "create");
     UserController = __decorate([
         routing_controllers_1.JsonController()

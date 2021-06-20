@@ -7,7 +7,7 @@ import { getoneform } from '../typeorm/func/getoneform';
 import {createConnection, getConnection} from "typeorm";
 import { Formdata } from '../typeorm/entity/Formdata';
 import { setcookie } from '../typeorm/func/setcookie';
-import { Session } from '../typeorm/entity/Session';
+import { User } from '../typeorm/entity/User';
 
 createConnection();
 
@@ -16,7 +16,7 @@ export class UserController {
 
   @Get('/setcookie')
   home(@Req() request: Request, @Res() response: Response){
-    var repo = getConnection().getRepository(Session);
+    var repo = getConnection().getRepository(User);
     var res : string = setcookie(request, response, repo);
     return response.send(res);
   }
@@ -33,9 +33,10 @@ export class UserController {
     return getoneform(repo, id);
   }
 
-  @Get('/createForm')
-  create(@Req() request: Request){
+  @Post('/createform')
+  create(@Body() form: Formdata){
     var repo = getConnection().getRepository(Formdata);
-    return createForm(repo);
+    return createForm(repo, form);
+    
   }
 }

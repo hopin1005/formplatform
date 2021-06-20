@@ -6,25 +6,29 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
     return c > 3 && r && Object.defineProperty(target, key, r), r;
 };
 exports.__esModule = true;
-exports.Session = void 0;
+exports.User = void 0;
 var typeorm_1 = require("typeorm");
-var Session = /** @class */ (function () {
-    function Session() {
+var Formdata_1 = require("./Formdata");
+var User = /** @class */ (function () {
+    function User() {
     }
     __decorate([
         typeorm_1.PrimaryGeneratedColumn()
-    ], Session.prototype, "id");
+    ], User.prototype, "id");
     __decorate([
         typeorm_1.Column('varchar', {
             length: 36
         })
-    ], Session.prototype, "userSession");
+    ], User.prototype, "userSession");
     __decorate([
-        typeorm_1.Column('int')
-    ], Session.prototype, "writeCount");
-    Session = __decorate([
+        typeorm_1.ManyToMany(function () { return Formdata_1.Formdata; }, {
+            cascade: true
+        }),
+        typeorm_1.JoinTable()
+    ], User.prototype, "written");
+    User = __decorate([
         typeorm_1.Entity()
-    ], Session);
-    return Session;
+    ], User);
+    return User;
 }());
-exports.Session = Session;
+exports.User = User;
