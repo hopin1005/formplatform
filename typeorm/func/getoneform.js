@@ -2,7 +2,9 @@
 exports.__esModule = true;
 exports.getoneform = void 0;
 require("reflect-metadata");
-function getoneform(repo, id) {
+var Formdatarepo_1 = require("../../typeorm/EntityRepo/Formdatarepo");
+function getoneform(id) {
+    var repo = Formdatarepo_1.createFormRepo();
     return repo.find({
         where: {
             id: id

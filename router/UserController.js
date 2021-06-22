@@ -16,37 +16,23 @@ var createform_1 = require("../typeorm/func/createform");
 var getallform_1 = require("../typeorm/func/getallform");
 var getoneform_1 = require("../typeorm/func/getoneform");
 var typeorm_1 = require("typeorm");
-var Formdata_1 = require("../typeorm/entity/Formdata");
-var setcookie_1 = require("../typeorm/func/setcookie");
-var User_1 = require("../typeorm/entity/User");
+var authMiddleware_1 = require("../middleware/authMiddleware");
 typeorm_1.createConnection();
 var UserController = /** @class */ (function () {
     function UserController() {
     }
-    UserController.prototype.home = function (request, response) {
-        var repo = typeorm_1.getConnection().getRepository(User_1.User);
-        var res = setcookie_1.setcookie(request, response, repo);
-        return response.send(res);
-    };
-    UserController.prototype.getAll = function (sort) {
-        var repo = typeorm_1.getConnection().getRepository(Formdata_1.Formdata);
-        return getallform_1.getallform(repo, sort);
+    UserController.prototype.getAll = function (sort, userid) {
+        return getallform_1.getallform(sort);
     };
     UserController.prototype.getOne = function (id) {
-        var repo = typeorm_1.getConnection().getRepository(Formdata_1.Formdata);
-        return getoneform_1.getoneform(repo, id);
+        return getoneform_1.getoneform(id);
     };
     UserController.prototype.create = function (form) {
-        var repo = typeorm_1.getConnection().getRepository(Formdata_1.Formdata);
-        return createform_1.createForm(repo, form);
+        return createform_1.createForm(form);
     };
     __decorate([
-        routing_controllers_1.Get('/setcookie'),
-        __param(0, routing_controllers_1.Req()), __param(1, routing_controllers_1.Res())
-    ], UserController.prototype, "home");
-    __decorate([
         routing_controllers_1.Get('/getallform'),
-        __param(0, routing_controllers_1.QueryParam("sort"))
+        __param(0, routing_controllers_1.QueryParam("sort")), __param(1, routing_controllers_1.CookieParam("userid"))
     ], UserController.prototype, "getAll");
     __decorate([
         routing_controllers_1.Get('/getoneform/:id'),
@@ -57,7 +43,8 @@ var UserController = /** @class */ (function () {
         __param(0, routing_controllers_1.Body())
     ], UserController.prototype, "create");
     UserController = __decorate([
-        routing_controllers_1.JsonController()
+        routing_controllers_1.JsonController(),
+        routing_controllers_1.UseBefore(authMiddleware_1.authMiddleware)
     ], UserController);
     return UserController;
 }());

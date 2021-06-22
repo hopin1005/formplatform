@@ -1,5 +1,8 @@
 import "reflect-metadata";
-export function getoneform(repo, id:number){
+import { createFormRepo } from '../../typeorm/EntityRepo/Formdatarepo';
+export function getoneform(id:number){
+
+    const repo = createFormRepo();
     return repo.find({
         where: {
             id : id
