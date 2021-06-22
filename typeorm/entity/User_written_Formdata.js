@@ -6,22 +6,20 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
     return c > 3 && r && Object.defineProperty(target, key, r), r;
 };
 exports.__esModule = true;
-exports.User = void 0;
+exports.UserWrittenFormdata = void 0;
 var typeorm_1 = require("typeorm");
-var User = /** @class */ (function () {
-    function User() {
+var UserWrittenFormdata = /** @class */ (function () {
+    function UserWrittenFormdata() {
     }
     __decorate([
-        typeorm_1.PrimaryGeneratedColumn()
-    ], User.prototype, "id");
+        typeorm_1.PrimaryColumn("int")
+    ], UserWrittenFormdata.prototype, "userId");
     __decorate([
-        typeorm_1.Column('varchar', {
-            length: 36
-        })
-    ], User.prototype, "userSession");
-    User = __decorate([
+        typeorm_1.PrimaryColumn("int")
+    ], UserWrittenFormdata.prototype, "formdataId");
+    UserWrittenFormdata = __decorate([
         typeorm_1.Entity()
-    ], User);
-    return User;
+    ], UserWrittenFormdata);
+    return UserWrittenFormdata;
 }());
-exports.User = User;
+exports.UserWrittenFormdata = UserWrittenFormdata;

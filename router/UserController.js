@@ -17,6 +17,7 @@ var getallform_1 = require("../typeorm/func/getallform");
 var getoneform_1 = require("../typeorm/func/getoneform");
 var typeorm_1 = require("typeorm");
 var authMiddleware_1 = require("../middleware/authMiddleware");
+var cancreateform_1 = require("../typeorm/func/cancreateform");
 typeorm_1.createConnection();
 var UserController = /** @class */ (function () {
     function UserController() {
@@ -26,6 +27,9 @@ var UserController = /** @class */ (function () {
     };
     UserController.prototype.getOne = function (id) {
         return getoneform_1.getoneform(id);
+    };
+    UserController.prototype.auth = function (userid) {
+        return cancreateform_1.cancreateform(userid);
     };
     UserController.prototype.create = function (form) {
         return createform_1.createForm(form);
@@ -38,6 +42,10 @@ var UserController = /** @class */ (function () {
         routing_controllers_1.Get('/getoneform/:id'),
         __param(0, routing_controllers_1.Param("id"))
     ], UserController.prototype, "getOne");
+    __decorate([
+        routing_controllers_1.Get('/cancreateform'),
+        __param(0, routing_controllers_1.CookieParam("userid"))
+    ], UserController.prototype, "auth");
     __decorate([
         routing_controllers_1.Post('/createform'),
         __param(0, routing_controllers_1.Body())

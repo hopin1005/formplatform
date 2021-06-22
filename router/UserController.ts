@@ -6,6 +6,7 @@ import { getoneform } from '../typeorm/func/getoneform';
 import {createConnection} from "typeorm";
 import {authMiddleware} from '../middleware/authMiddleware';
 import {Formdata} from '../typeorm/entity/Formdata';
+import {cancreateform} from '../typeorm/func/cancreateform';
 
 createConnection();
 @JsonController()
@@ -22,10 +23,13 @@ export class UserController {
     return getoneform(id);
   }
 
+  @Get('/cancreateform')
+  auth(@CookieParam("userid") userid: string){
+    return cancreateform(userid);
+  }
 
   @Post('/createform')
   create(@Body() form: Formdata){
     return createForm(form);
-    
   }
 }

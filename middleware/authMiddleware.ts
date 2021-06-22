@@ -5,8 +5,8 @@ export function authMiddleware(req: Request, res: Response, next){
     const cookieParser = require('cookie-parser');
     var cookies = uuidv4();
     cookieParser();
-    stroreUserData(cookies)
-    if(req.cookies.userid == undefined){
+    if(req.cookies.userid === undefined){
+        stroreUserData(cookies)
         res.cookie('userid', cookies, {sameSite: 'none', secure: true});
     }
     next();

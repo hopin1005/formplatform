@@ -7,8 +7,8 @@ function authMiddleware(req, res, next) {
     var cookieParser = require('cookie-parser');
     var cookies = uuid_1.v4();
     cookieParser();
-    storeuserdata_1.stroreUserData(cookies);
-    if (req.cookies.userid == undefined) {
+    if (req.cookies.userid === undefined) {
+        storeuserdata_1.stroreUserData(cookies);
         res.cookie('userid', cookies, { sameSite: 'none', secure: true });
     }
     next();
