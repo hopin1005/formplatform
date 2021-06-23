@@ -42,8 +42,8 @@ var UserController = /** @class */ (function () {
     UserController.prototype.pathnotfound = function () {
         return "404 not found!!!";
     };
-    UserController.prototype.create = function (form) {
-        return createform_1.createForm(form);
+    UserController.prototype.create = function (form, userid) {
+        return createform_1.createForm(form, userid);
     };
     __decorate([
         routing_controllers_1.Get('/getallform'),
@@ -70,7 +70,7 @@ var UserController = /** @class */ (function () {
     ], UserController.prototype, "pathnotfound");
     __decorate([
         routing_controllers_1.Post('/createform'),
-        __param(0, routing_controllers_1.Body())
+        __param(0, routing_controllers_1.Body()), __param(1, routing_controllers_1.CookieParam("userid"))
     ], UserController.prototype, "create");
     UserController = __decorate([
         routing_controllers_1.JsonController(),
