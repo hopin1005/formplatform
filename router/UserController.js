@@ -18,6 +18,8 @@ var getoneform_1 = require("../typeorm/func/getoneform");
 var typeorm_1 = require("typeorm");
 var authMiddleware_1 = require("../middleware/authMiddleware");
 var cancreateform_1 = require("../typeorm/func/cancreateform");
+var successaddform_1 = require("../typeorm/func/successaddform");
+var userwrittenform_1 = require("../typeorm/func/userwrittenform");
 typeorm_1.createConnection();
 var UserController = /** @class */ (function () {
     function UserController() {
@@ -30,6 +32,15 @@ var UserController = /** @class */ (function () {
     };
     UserController.prototype.auth = function (userid) {
         return cancreateform_1.cancreateform(userid);
+    };
+    UserController.prototype.userWriteFormAdd = function (url, referer, userid) {
+        return successaddform_1.successAddForm(url, referer, userid);
+    };
+    UserController.prototype.writtenForm = function (userid) {
+        return userwrittenform_1.getUserWrittenForm(userid);
+    };
+    UserController.prototype.pathnotfound = function () {
+        return "404 not found!!!";
     };
     UserController.prototype.create = function (form) {
         return createform_1.createForm(form);
@@ -46,6 +57,17 @@ var UserController = /** @class */ (function () {
         routing_controllers_1.Get('/cancreateform'),
         __param(0, routing_controllers_1.CookieParam("userid"))
     ], UserController.prototype, "auth");
+    __decorate([
+        routing_controllers_1.Get('/success'),
+        __param(0, routing_controllers_1.QueryParam("url")), __param(1, routing_controllers_1.HeaderParam("Referer")), __param(2, routing_controllers_1.CookieParam("userid"))
+    ], UserController.prototype, "userWriteFormAdd");
+    __decorate([
+        routing_controllers_1.Get('/writtenform'),
+        __param(0, routing_controllers_1.CookieParam("userid"))
+    ], UserController.prototype, "writtenForm");
+    __decorate([
+        routing_controllers_1.Get('/*')
+    ], UserController.prototype, "pathnotfound");
     __decorate([
         routing_controllers_1.Post('/createform'),
         __param(0, routing_controllers_1.Body())

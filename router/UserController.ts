@@ -1,4 +1,4 @@
-import { JsonController, Param, Body, Get, Post,QueryParam, UseBefore, CookieParam } from 'routing-controllers';
+import { JsonController, Param, Body, Get, Post,QueryParam, UseBefore, CookieParam, HeaderParam } from 'routing-controllers';
 import "reflect-metadata";
 import { createForm } from '../typeorm/func/createform';
 import { getallform } from '../typeorm/func/getallform';
@@ -7,6 +7,8 @@ import {createConnection} from "typeorm";
 import {authMiddleware} from '../middleware/authMiddleware';
 import {Formdata} from '../typeorm/entity/Formdata';
 import {cancreateform} from '../typeorm/func/cancreateform';
+import {successAddForm} from '../typeorm/func/successaddform';
+import {getUserWrittenForm} from '../typeorm/func/userwrittenform';
 
 createConnection();
 @JsonController()
@@ -26,6 +28,21 @@ export class UserController {
   @Get('/cancreateform')
   auth(@CookieParam("userid") userid: string){
     return cancreateform(userid);
+  }
+
+  @Get('/success')
+  userWriteFormAdd(@QueryParam("url") url: string, @HeaderParam("Referer") referer: string, @CookieParam("userid") userid: string){
+    return successAddForm(url, referer, userid);
+  }
+
+  @Get('/writtenform')
+  writtenForm(@CookieParam("userid") userid: string){
+    return getUserWrittenForm(userid);
+  }
+
+  @Get('/*')
+  pathnotfound(){
+    return "404 not found!!!";
   }
 
   @Post('/createform')
