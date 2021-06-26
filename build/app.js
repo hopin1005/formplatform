@@ -1,7 +1,7 @@
 "use strict";
-exports.__esModule = true;
+Object.defineProperty(exports, "__esModule", { value: true });
 var routing_controllers_1 = require("routing-controllers");
-var UserController_1 = require("../router/UserController");
+var UserController_1 = require("./router/UserController");
 require("reflect-metadata");
 var express = require('express');
 var cookieParser = require('cookie-parser');
