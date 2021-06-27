@@ -1,31 +1,35 @@
-import {Entity, PrimaryGeneratedColumn, Column} from "typeorm";
-
+import { Entity, PrimaryGeneratedColumn, Column } from 'typeorm'
+import { Length, IsString } from 'class-validator'
+import { getTime } from '../../other/func/getTime'
 
 @Entity()
 export class Formdata {
-
     @PrimaryGeneratedColumn()
     id: number;
 
-    @Column("varchar", {
-        length: 60
+    @Length(0, 60)
+    @Column('varchar', {
+      length: 60
     })
     name: string;
 
-    @Column("varchar",{
-        length: 1500
+    @Length(0, 1500)
+    @Column('varchar', {
+      length: 1500
     })
-    info: string; 
+    info: string;
 
-    @Column("varchar",{
-        length: 400
+    @Length(0, 400)
+    @Column('varchar', {
+      length: 400
     })
     link: string;
 
-    @Column("date")
+    @IsString()
+    @Column('date')
     endTime: string;
 
-    @Column("date")
-    startTime: string;
-
+    @IsString()
+    @Column('date')
+    startTime: string = getTime();
 }

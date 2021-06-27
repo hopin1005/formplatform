@@ -1,14 +1,15 @@
-import {Entity, PrimaryGeneratedColumn, Column, ManyToMany, JoinTable} from "typeorm";
+import { Entity, PrimaryGeneratedColumn, Column } from 'typeorm'
+import { IsInt, Length } from 'class-validator'
 
 @Entity()
-export class User{
-
+export class User {
+    @IsInt()
     @PrimaryGeneratedColumn()
     id: number;
 
+    @Length(0, 36)
     @Column('varchar', {
-        length: 36
+      length: 36
     })
     userSession: string;
-    
 }

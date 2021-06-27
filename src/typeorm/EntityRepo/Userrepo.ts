@@ -1,6 +1,6 @@
-import {User} from "../entity/User";
-import {getConnection} from "typeorm";
+import { User } from '../entity/User'
+import { getConnection } from 'typeorm'
 
-export function createUserRepo(){
-    return getConnection().getRepository(User);
+export function createUserRepo () {
+  return getConnection().getRepository(User)
 }

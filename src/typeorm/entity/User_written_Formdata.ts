@@ -1,12 +1,13 @@
-import {Entity, PrimaryColumn} from "typeorm";
+import { Entity, PrimaryColumn } from 'typeorm'
+import { IsInt } from 'class-validator'
 
 @Entity()
-export class UserWrittenFormdata{
-
-    @PrimaryColumn("int")
+export class UserWrittenFormdata {
+    @IsInt()
+    @PrimaryColumn('int')
     userId: number;
 
-    @PrimaryColumn("int")
+    @IsInt()
+    @PrimaryColumn('int')
     formdataId: number;
-
 }

@@ -1,4 +1,4 @@
-import * as moment from 'moment';
+import moment from "moment"
 
 export function getTime() : string{
     const format: string = "YYYY-MM-DD"
