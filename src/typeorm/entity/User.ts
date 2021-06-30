@@ -5,11 +5,11 @@ import { IsInt, Length } from 'class-validator'
 export class User {
     @IsInt()
     @PrimaryGeneratedColumn()
-    id: number;
+    id: number = 0;
 
     @Length(0, 36)
     @Column('varchar', {
       length: 36
     })
-    userSession: string;
+    userSession: string = '';
 }

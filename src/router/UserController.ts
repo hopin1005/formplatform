@@ -1,4 +1,4 @@
-import { JsonController, Param, Body, Get, Post, QueryParam, UseBefore, CookieParam, HeaderParam } from 'routing-controllers'
+import { JsonController, Param, Body, Get, Post, QueryParam, UseBefore, CookieParam, HeaderParam, UseAfter } from 'routing-controllers'
 import 'reflect-metadata'
 import { createForm } from '../typeorm/func/createform'
 import { getallform } from '../typeorm/func/getallform'
@@ -10,9 +10,11 @@ import { cancreateform } from '../typeorm/func/cancreateform'
 import { successAddForm } from '../typeorm/func/successaddform'
 import { getUserWrittenForm } from '../typeorm/func/userwrittenform'
 
+
 createConnection()
 @JsonController()
 @UseBefore(authMiddleware)
+
 export class UserController {
   @Get('/getallform')
   getAll (@QueryParam('sort') sort: string, @CookieParam('userid') userid: string) {
@@ -39,10 +41,6 @@ export class UserController {
     return getUserWrittenForm(userid)
   }
 
-  @Get('/*')
-  pathnotfound () {
-    return '404 not found!!!'
-  }
 
   @Post('/createform')
   create (@Body() form: Formdata, @CookieParam('userid') userid: string) {

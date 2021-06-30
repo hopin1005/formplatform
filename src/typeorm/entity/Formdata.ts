@@ -5,29 +5,29 @@ import { getTime } from '../../other/func/getTime'
 @Entity()
 export class Formdata {
     @PrimaryGeneratedColumn()
-    id: number;
+    id: number = 0;
 
     @Length(0, 60)
     @Column('varchar', {
       length: 60
     })
-    name: string;
+    name: string = '';
 
     @Length(0, 1500)
     @Column('varchar', {
       length: 1500
     })
-    info: string;
+    info: string = '';
 
     @Length(0, 400)
     @Column('varchar', {
       length: 400
     })
-    link: string;
+    link: string = '';
 
     @IsString()
     @Column('date')
-    endTime: string;
+    endTime: string = '';
 
     @IsString()
     @Column('date')

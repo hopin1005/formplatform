@@ -13,7 +13,9 @@ import { resTrue, resFalse } from '../../other/resTrueFalse'
 export function createForm (form: Formdata, userid: string) {
   return create()
   async function create () {
-    const cancreate: object = await cancreateform(userid)
+    let cancreate: any = {};
+    cancreate['success'] = '';
+    cancreate = await cancreateform(userid)
 
     // check if repeate url
     const formRepo = createFormRepo()
