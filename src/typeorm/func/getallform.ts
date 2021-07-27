@@ -16,7 +16,8 @@ export function getallform (sort: string) {
     return repo.find({
       order: {
         endTime: 'ASC'
-      }
+      },
+      take: 3
     })
   }
 }

@@ -2,7 +2,7 @@ import 'reflect-metadata'
 import { Formdata } from '../entity/Formdata'
 import { createFormRepo } from '../../typeorm/EntityRepo/Formdatarepo'
 import { cancreateform } from '../func/cancreateform'
-import { resTrue, resFalse } from '../../other/resTrueFalse'
+import { resTrue, resFalse, resFormRepeat, resNotWriteForm } from '../../other/resTrueFalse'
 
 // {
 //         "name": "formname5",
@@ -16,6 +16,9 @@ export function createForm (form: Formdata, userid: string) {
     let cancreate: any = {};
     cancreate['success'] = '';
     cancreate = await cancreateform(userid)
+    if(cancreate.success === 'false'){
+      return resNotWriteForm
+    }
 
     // check if repeate url
     const formRepo = createFormRepo()
@@ -24,6 +27,10 @@ export function createForm (form: Formdata, userid: string) {
         link: form.link
       }
     })
+
+    if(formcheck != undefined){
+      return resFormRepeat
+    }
 
     if (cancreate.success === 'true' && formcheck === undefined) {
       const repo = createFormRepo()
